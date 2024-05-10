@@ -1,18 +1,12 @@
-function permute(nums) {
-  const result = [];
-  backtrack([]);
-  return result;
-  function backtrack(permutation) {
-    if (permutation.length === nums.length) {
-      result.push([...permutation]);
-      return;
-    }
-    for (const num of nums) {
-      if (!permutation.includes(num)) {
-        permutation.push(num);
-        backtrack(permutation);
-        permutation.pop();
-      }
+function moveZeroes(nums) {
+  let index = 0;
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] !== 0) {
+      nums[index++] = nums[i];
     }
   }
+  for (let i = index; i < nums.length; i++) {
+    nums[i] = 0;
+  }
+  return nums;
 }
