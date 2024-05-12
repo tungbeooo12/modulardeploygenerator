@@ -1,12 +1,13 @@
-function bubbleSort(arr) {
-  for (let i = 0; i < arr.length - 1; i++) {
-    for (let j = 0; j < arr.length - i - 1; j++) {
-      if (arr[j] > arr[j + 1]) {
-        let temp = arr[j];
-        arr[j] = arr[j + 1];
-        arr[j + 1] = temp;
-      }
+function canPartition(nums) {
+  const sum = nums.reduce((acc, val) => acc + val, 0);
+  if (sum % 2 !== 0) return false;
+  const target = sum / 2;
+  const dp = new Array(target + 1).fill(false);
+  dp[0] = true;
+  for (const num of nums) {
+    for (let i = target; i >= num; i--) {
+      dp[i] = dp[i] || dp[i - num];
     }
   }
-  return arr;
+  return dp[target];
 }
