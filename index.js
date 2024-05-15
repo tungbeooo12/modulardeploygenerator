@@ -1,14 +1,26 @@
-function rob(nums) {
-  if (nums.length === 1) return nums[0];
-  const robRange = (start, end) => {
-    let prevMax = 0;
-    let currMax = 0;
-    for (let i = start; i <= end; i++) {
-      const temp = currMax;
-      currMax = Math.max(currMax, prevMax + nums[i]);
-      prevMax = temp;
-    }
-    return currMax;
+function letterCombinations(digits) {
+  if (digits.length === 0) return [];
+  const map = {
+    2: "abc",
+    3: "def",
+    4: "ghi",
+    5: "jkl",
+    6: "mno",
+    7: "pqrs",
+    8: "tuv",
+    9: "wxyz",
   };
-  return Math.max(robRange(0, nums.length - 2), robRange(1, nums.length - 1));
+  const result = [];
+  backtrack("", digits);
+  return result;
+  function backtrack(combination, nextDigits) {
+    if (nextDigits.length === 0) result.push(combination);
+    else {
+      const digit = nextDigits.substring(0, 1);
+      const letters = map[digit];
+      for (const letter of letters) {
+        backtrack(combination + letter, nextDigits.substring(1));
+      }
+    }
+  }
 }
